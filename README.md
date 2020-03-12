@@ -1,3 +1,3 @@
 #Websockets++
 Hello,
-i want to try websockets in c++ code!
+i want to make websockets in c++ code!
