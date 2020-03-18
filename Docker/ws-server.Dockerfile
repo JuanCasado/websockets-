@@ -10,7 +10,7 @@ COPY --chown=app:app ws-lib /opt
 
 RUN mkdir /opt/build
 WORKDIR /opt/build
-RUN cmake -DUSE_TLS=1 -DUSE_WS=1 ..
+RUN cmake -DUSE_TLS=1 ..
 RUN make -j
 RUN make install 
 
