@@ -20,24 +20,9 @@ services:
     build:
       context: ./
       dockerfile: Docker/ws-client.Dockerfile
-
-  ws-server-node:
-    image: ws-server-node:latest
-    container_name: ws-server-node
-    hostname: ws-server-node
-    build:
-      context: ./ws-server-node/
-      dockerfile: ../Docker/ws-server-node.Dockerfile
-    ports:
-      - 8081:8080
-
-  ws-web:
-    image: ws-web:latest
-    container_name: ws-web
-    hostname: ws-web
-    build:
-      context: ./ws-web/
-      dockerfile: ../Docker/ws-web.Dockerfile
-    ports:
-      - 80:80
-
+    depends_on: 
+      - ws-server
+    environment: 
+      - FILE=input.json
+    volumes:
+      - ./ws-client:/ws-client

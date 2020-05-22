@@ -1,0 +1,25 @@
+{
+  "executor":"calculator",
+  "actions": [
+    {
+      "operation":"+",
+      "operands":[4, 5]
+    },
+    {
+      "operation":"*",
+      "operands":[4, 5]
+    },
+    {
+      "operation":"-",
+      "operands":[40, 5]
+    },
+    {
+      "operation":"/",
+      "operands":[25, 5]
+    },
+    {
+      "operation":"+",
+      "operands":[40, 50]
+    }
+  ]
+}

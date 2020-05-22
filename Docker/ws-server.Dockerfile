@@ -19,7 +19,8 @@ WORKDIR /home/app
 COPY ws-server .
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
-RUN g++ main.cpp -lixwebsocket -lssl -lcrypto -lz -lpthread -o main
+RUN mkdir ./build
+RUN make
 
 USER app
 
