@@ -22,6 +22,7 @@ double ExecutableCalculator::execute (std::string action, std::vector<double> pa
   else if (action == "/") return this->divide(payload);
   else if (action == "*") return this->multiply(payload);
   else if (action == "-") return this->substract(payload);
+  return 0;
 }
 
 void ExecutableCalculator::setCalculator (Calculator calculator) {

@@ -4,23 +4,26 @@
 #include <ixwebsocket/IXWebSocketServer.h>
 #include "Executor/Executor.hpp"
 
-Executor executor{};
+using namespace ix;
 
 int main (int argc, char** argv){
 
-  ix::WebSocketServer server{
-    8080,//SocketServer::kDefaultPort,
-    "0.0.0.0",//SocketServer::kDefaultHost,
-    20,//SocketServer::kDefaultTcpBacklog,
-    1000,//SocketServer::kDefaultMaxConnections,
-    5,//WebSocketServer::kDefaultHandShakeTimeoutSecs,
-    ix::SocketServer::kDefaultAddressFamily
+  Executor executor;
+
+  WebSocketServer server{
+    8080,        //SocketServer::kDefaultPort,
+    "0.0.0.0",   //SocketServer::kDefaultHost,
+    20,          //SocketServer::kDefaultTcpBacklog,
+    1000,        //SocketServer::kDefaultMaxConnections,
+    5,           //WebSocketServer::kDefaultHandShakeTimeoutSecs,
+    SocketServer::kDefaultAddressFamily
   };
 
-  server.setOnConnectionCallback( [&server] (std::shared_ptr<ix::WebSocket> webSocket, std::shared_ptr<ix::ConnectionState> connectionState) {
-    webSocket->setOnMessageCallback( [webSocket, connectionState, &server] (const ix::WebSocketMessagePtr msg) {
-      std::cout << "Data";
-      if (msg->type == ix::WebSocketMessageType::Message) {
+  server.setOnConnectionCallback( [&server, &executor] (std::shared_ptr<WebSocket> webSocket, std::shared_ptr<ConnectionState> connectionState) {
+    std::cout << "New Connection";
+    webSocket->setOnMessageCallback( [webSocket, connectionState, &server, &executor] (const WebSocketMessagePtr msg) {
+      std::cout << "New Data";
+      if (msg->type == WebSocketMessageType::Message) {
         std::cout << msg->str << std::endl;
         
         //NEW

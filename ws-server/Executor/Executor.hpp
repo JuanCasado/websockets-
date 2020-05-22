@@ -7,11 +7,11 @@
 #include <memory>
 
 class Executor {
-public:
-  void setWebSocket(std::shared_ptr<ix::WebSocket> ws);
-  void setActions(std::string actions);
-  void execute();
-private:
-  std::shared_ptr<ix::WebSocket> ws;
-  nlohmann::json actions;
+  public:
+    void setWebSocket(std::shared_ptr<ix::WebSocket> ws);
+    void setActions(std::string actions);
+    void execute();
+  private:
+    std::shared_ptr<ix::WebSocket> ws;
+    nlohmann::json actions;
 };
