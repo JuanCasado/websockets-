@@ -10,7 +10,7 @@ double Calculator::add(std::vector<double> operands){
 }
 
 double Calculator::divide(std::vector<double> operands){
-  double acc = operands[1];
+  double acc = operands[0];
   for (std::vector<double>::size_type i = 1; i < operands.size(); ++i) {
     acc /= operands[i];
   }
@@ -26,7 +26,7 @@ double Calculator::multiply(std::vector<double> operands){
 }
 
 double Calculator::substract(std::vector<double> operands){
-  double acc = operands[1];
+  double acc = operands[0];
   for (std::vector<double>::size_type i = 1; i < operands.size(); ++i) {
     acc -= operands[i];
   }

@@ -1,7 +1,9 @@
 
-#include "Executor.hpp"
 
-void Executor::setWebSocket(std::shared_ptr<ix::WebSocket> ws) {
+#include "Executor.hpp"
+#include <iostream>
+
+void Executor::setWebSocket(Websocket* ws) {
   this->ws = ws;
 }
 
@@ -10,14 +12,13 @@ void Executor::setActions(std::string actions) {
 }
 
 void Executor::execute() {
-  /**
-  ExecutorFactory executorFactory{};
-  Executor executor = executorFactory.create(this->actions.executor);
-  for (operacion : this->actions) {
-    std::string action = operacion.operation;
-    std::vector<double> payload = operacion.operands;
-    executor.execute(action, payload);
+  ExecutableFactory executableFactory{};
+  Executable *executable = executableFactory.create(this->actions["executor"].get<std::string>());
+  for (nlohmann::json::iterator action = this->actions["actions"].begin(); action != this->actions["actions"].end(); ++action) {
+    std::string operation = (*action)["operation"].get<std::string>();
+    std::vector<double> operators =  (*action)["operands"].get<std::vector<double>>();
+    double out = executable->execute(operation, operators);
+    this->ws->sendPartial(out);
   }
-  */
+  this->ws->sendFinal();
 }
-

@@ -5,7 +5,6 @@
 
 class ExecutableCalculator: public Executable, public Calculator {
 public:
-  ExecutableCalculator(){};
   ~ExecutableCalculator(){};
   void setCalculator(Calculator calculator);
   double add(std::vector<double> operands);

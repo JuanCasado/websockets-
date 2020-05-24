@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include <ixwebsocket/IXWebSocketServer.h>
 #include "Executor/Executor.hpp"
+#include "Communications/Websocket.hpp"
 
 using namespace ix;
 
@@ -20,20 +21,11 @@ int main (int argc, char** argv){
   };
 
   server.setOnConnectionCallback( [&server, &executor] (std::shared_ptr<WebSocket> webSocket, std::shared_ptr<ConnectionState> connectionState) {
-    std::cout << "New Connection";
     webSocket->setOnMessageCallback( [webSocket, connectionState, &server, &executor] (const WebSocketMessagePtr msg) {
-      std::cout << "New Data";
       if (msg->type == WebSocketMessageType::Message) {
-        std::cout << msg->str << std::endl;
-        
-        //NEW
-        executor.setWebSocket(webSocket);
+        executor.setWebSocket(new Websocket(webSocket));
         executor.setActions(msg->str);
         executor.execute();
-
-        nlohmann::json jmsg = nlohmann::json::parse(msg->str);
-        std::string smsg = jmsg.dump();
-        webSocket->send(smsg, msg->binary);
       }
     });
   });

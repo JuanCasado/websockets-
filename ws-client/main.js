@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.getElementById('status').innerHTML='OPEN'
   })
   ws.addEventListener('message', function (event) {
-    document.getElementById('out').innerHTML=JSON.stringify(JSON.parse(event.data), undefined, 1)
+    document.getElementById('out').innerHTML+=JSON.stringify(JSON.parse(event.data), undefined, 1)+'\n\n\n'
     console.log(event.data)
   })
   ws.addEventListener('close', (event) => {
